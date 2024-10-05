@@ -95,6 +95,9 @@ augroup lsp_install
 	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+" LSP Diagnostics Configuration
+let g:lsp_diagnostics_virtual_text_enabled = 0 
+let g:lsp_diagnostics_highlights_enabled = 0
 
 " Plugin Management
 call plug#begin()
