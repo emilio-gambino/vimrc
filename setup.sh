@@ -1,4 +1,10 @@
-#!/bin/sh
+#/bin/sh
+
+# Check for cargo 
+echo "Downloading dependencies.."
+set -x
+sudo apt install cargo npm
+set +x
 
 # 1. Copy vimrc file
 if [ -e ~/.vimrc ]; then
