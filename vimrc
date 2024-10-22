@@ -28,7 +28,6 @@ nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <Leader>d :buffers<CR>:bdelete<Space>
 " Split right/left
 nnoremap <Leader>l :buffers<CR>:vert belowright sb<Space>
-nnoremap <Leader>l :buffers<CR>:vert belowright sb<Space>
 nnoremap <Leader>k :buffers<CR>:split<Space>
 nnoremap <Leader>j :buffers<CR>:belowright split<Space>
 " Move across tabs
