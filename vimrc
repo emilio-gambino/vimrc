@@ -6,15 +6,17 @@ set number
 set backspace=2
 set shiftwidth=2
 
+set autoread
 
 set termguicolors
 set background=dark
 " https://github.com/jsit/toast.vim
 colorscheme toast
 
-syntax on
 filetype on
 set hidden
+
+set undofile
 
 let mapleader="!"
 
@@ -28,6 +30,7 @@ nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <Leader>d :buffers<CR>:bdelete<Space>
 " Split right/left
 nnoremap <Leader>l :buffers<CR>:vert belowright sb<Space>
+nnoremap <Leader>h :buffers<CR>:vert belowleft sb<Space>
 nnoremap <Leader>k :buffers<CR>:split<Space>
 nnoremap <Leader>j :buffers<CR>:belowright split<Space>
 " Move across tabs
@@ -49,7 +52,6 @@ function! Tree()
 		let t:NERDTree_is_open = 1
 	endif
 endfunction
-
 
 
 " Saving File
@@ -80,7 +82,8 @@ function! s:on_lsp_buffer_enabled() abort
 	setlocal omnifunc=lsp#complete
 	setlocal signcolumn=yes
 	nmap <buffer> K <plug>(lsp-hover)
-	nmap <buffer> <leader>x <plug>(lsp-document-format)
+	"nmap <buffer> <leader>x <plug>(lsp-document-format)
+	nmap <buffer> <silent> <leader>x :call <SID>format()<CR>
 	nmap <buffer> gd <plug>(lsp-definition)
 	nmap <buffer> <leader>a <plug>(lsp-code-action)
 	nmap <buffer> <leader>r <plug>(lsp-rename)
@@ -98,6 +101,35 @@ augroup END
 let g:lsp_diagnostics_virtual_text_enabled = 0 
 let g:lsp_diagnostics_highlights_enabled = 0
 
+" Polyglot csv separator fix
+let g:csv_no_conceal = 1
+
+" Start preview
+nmap <leader>m <Plug>MarkdownPreview
+" Stop preview
+nmap <leader>s <Plug>MarkdownPreviewStop
+
+function! s:format() abort
+	let l:save_cursor = getpos(".")
+  if &filetype ==# 'markdown'
+    silent execute '%!prettier --stdin-filepath ' . shellescape(expand('%:p'))
+  else
+    execute 'LspDocumentFormat'
+  endif
+	call setpos('.', l:save_cursor)
+endfunction
+
+" Define a custom function to open Brave in a new tab
+function! OpenBraveInNewTab(url)
+  let l:cmd = 'brave --new-window ' . shellescape(a:url)
+  call system(l:cmd)
+endfunction
+" Disable default browser opening
+let g:mkdp_browser = ''
+let g:mkdp_browserfunc = 'OpenBraveInNewTab'
+
+autocmd FileType markdown nnoremap <buffer> <C-b> o<br><CR><Esc>
+
 " Plugin Management
 call plug#begin()
 
@@ -114,6 +146,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 
+" Markdown Preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install'  }
+
+
 call plug#end()
 
-
+syntax on
