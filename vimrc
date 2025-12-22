@@ -44,13 +44,13 @@ nnoremap <c-q> <c-W>c
 " Open File Tree
 nnoremap <c-x> :call Tree()<CR>
 function! Tree()
-	if exists("t:NERDTree_is_open") && t:NERDTree_is_open
-		NERDTreeClose
-		let t:NERDTree_is_open = 0
-	else
-		NERDTreeToggle
-		let t:NERDTree_is_open = 1
-	endif
+        if exists("t:NERDTree_is_open") && t:NERDTree_is_open
+                NERDTreeClose
+                let t:NERDTree_is_open = 0
+        else
+                NERDTreeToggle
+                let t:NERDTree_is_open = 1
+        endif
 endfunction
 
 
@@ -79,22 +79,22 @@ let g:AutoPairsShortcutJump = '<C-)>'
 " Language Servers
 " https://github.com/prabirshrestha/vim-lsp/tree/master
 function! s:on_lsp_buffer_enabled() abort
-	setlocal omnifunc=lsp#complete
-	setlocal signcolumn=yes
-	nmap <buffer> K <plug>(lsp-hover)
-	"nmap <buffer> <leader>x <plug>(lsp-document-format)
-	nmap <buffer> <silent> <leader>x :call <SID>format()<CR>
-	nmap <buffer> gd <plug>(lsp-definition)
-	nmap <buffer> <leader>a <plug>(lsp-code-action)
-	nmap <buffer> <leader>r <plug>(lsp-rename)
-	nmap <buffer> <leader>e <plug>(lsp-document-diagnostics)
-	nmap <buffer> [ <plug>(lsp-previous-diagnostic)
-	nmap <buffer> ] <plug>(lsp-next-diagnostic)
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=yes
+        nmap <buffer> K <plug>(lsp-hover)
+        "nmap <buffer> <leader>x <plug>(lsp-document-format)
+        nmap <buffer> <silent> <leader>x :call <SID>format()<CR>
+        nmap <buffer> gd <plug>(lsp-definition)
+        nmap <buffer> <leader>a <plug>(lsp-code-action)
+        nmap <buffer> <leader>r <plug>(lsp-rename)
+        nmap <buffer> <leader>e <plug>(lsp-document-diagnostics)
+        nmap <buffer> [ <plug>(lsp-previous-diagnostic)
+        nmap <buffer> ] <plug>(lsp-next-diagnostic)
 endfunction
 
 augroup lsp_install
-	au!
-	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
 " LSP Diagnostics Configuration
@@ -110,13 +110,13 @@ nmap <leader>m <Plug>MarkdownPreview
 nmap <leader>s <Plug>MarkdownPreviewStop
 
 function! s:format() abort
-	let l:save_cursor = getpos(".")
+        let l:save_cursor = getpos(".")
   if &filetype ==# 'markdown'
     silent execute '%!prettier --stdin-filepath ' . shellescape(expand('%:p'))
   else
     execute 'LspDocumentFormat'
   endif
-	call setpos('.', l:save_cursor)
+        call setpos('.', l:save_cursor)
 endfunction
 
 " Define a custom function to open Brave in a new tab
