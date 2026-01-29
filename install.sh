@@ -10,11 +10,13 @@ sudo apt install -y xorg xinit stterm suckless-tools build-essential libx11-dev 
 # Install fonts
 sudo apt install -y fonts-dejavu fonts-liberation fonts-noto fonts-noto-cjk fonts-noto-color-emoji
 
-
-mkdir -p "$HOME/.config"
+# Set timezone
+sudo timedatectl set-timezone Europe/Paris
 
 # Setup git parameters
 git config --global core.editor "vim"
+
+mkdir -p "$HOME/.config"
 
 # Setup vimrc
 git clone https://github.com/emilio-gambino/vimrc.git
