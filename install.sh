@@ -5,7 +5,7 @@ echo "Downloading basic dependencies.."
 
 set -x
 sudo apt update 
-sudo apt install -y xorg xinit stterm suckless-tools build-essential libx11-dev libxinerama-dev libxft-dev make gcc git clangd vim cargo npm
+sudo apt install -y xorg xinit stterm suckless-tools build-essential libx11-dev libxinerama-dev libxft-dev make gcc git clangd vim cargo npm yarn
 
 # Install fonts
 sudo apt install -y fonts-dejavu fonts-liberation fonts-noto fonts-noto-cjk fonts-noto-color-emoji
