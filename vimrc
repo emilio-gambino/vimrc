@@ -121,7 +121,7 @@ endfunction
 
 " Define a custom function to open Brave in a new tab
 function! OpenBraveInNewTab(url)
-  let l:cmd = 'brave --new-window ' . shellescape(a:url)
+  let l:cmd = 'brave-browser --new-window ' . shellescape(a:url)
   call system(l:cmd)
 endfunction
 " Disable default browser opening
